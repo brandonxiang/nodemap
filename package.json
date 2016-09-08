@@ -1,27 +1,27 @@
 {
-  "name": "nodemap",
-  "version": "1.0.0",
-  "description": "A electron app for nodemap_spider",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/brandonxiang/nodemap.git"
-  },
-  "keywords": [
-    "node",
-    "map",
-    "electron"
-  ],
-  "author": "brandonxiang",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/brandonxiang/nodemap/issues"
-  },
-  "homepage": "https://github.com/brandonxiang/nodemap#readme",
-  "devDependencies": {
-    "electron": "^1.3.5"
-  }
+    "name": "nodemap",
+    "version": "1.0.0",
+    "description": "A electron app for nodemap_spider",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brandonxiang/nodemap.git"
+    },
+    "keywords": [
+        "node",
+        "map",
+        "electron"
+    ],
+    "author": "brandonxiang",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/brandonxiang/nodemap/issues"
+    },
+    "homepage": "https://github.com/brandonxiang/nodemap#readme",
+    "devDependencies": {
+        "electron": "^1.3.5"
+    }
 }
