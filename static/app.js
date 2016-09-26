@@ -1,5 +1,7 @@
 /*global L*/
 /*global $*/
+var nodemap_spider = require('nodemap_spider');
+
 
 var map
 
@@ -81,28 +83,29 @@ function initMap() {
         "StamenToner": StamenToner,
         "StamenWaterColor": StamenWaterColor,
         "OpenTopoMap": OpenTopoMap
-    }, {}, {collapsed: false}).addTo(map)
+    }, {}, { collapsed: false }).addTo(map)
 }
 
 function initPage() {
-    $("#downloadstart").click(function () {
+    $("#downloadstart").click(function() {
         var name = $("#name").val()
         var type = $("#type").val()
         var bound = $("#bound").val()
         var zoom = parseInt($("#zoom").val())
 
         if (name !== "" && (!isNaN(zoom)) && (zoom > 0 && zoom < 20)) {
-            $.post("./download", {
-                name: name,
-                type: type,
-                bound: bound,
-                zoom: zoom
-            },
-                function (data) {
-                    alert(data)
-                }
-            )
-            // $("#download").modal()
+            nodemap_spider.procesLatlng(23.3488500800, 112.4821141700, 21.6283230000, 115.0540240000, 10, 'gaode', 'gaode')
+                // $.post("./download", {
+                //     name: name,
+                //     type: type,
+                //     bound: bound,
+                //     zoom: zoom
+                // },
+                //     function (data) {
+                //         alert(data)
+                //     }
+                // )
+                // $("#download").modal()
         }
     })
 }
@@ -126,14 +129,14 @@ function initControl() {
         }
     }).addTo(map)
 
-    map.on("draw:created", function (e) {
+    map.on("draw:created", function(e) {
         var layer = e.layer
 
         drawnItems.addLayer(layer)
 
 
         layer.bindLabel("双击区域下载地图")
-            .on("dblclick", function (e) {
+            .on("dblclick", function(e) {
                 var bound = e.target.getBounds()
                 $("#bound").val(bound.getNorth() + "," + bound.getWest() + "," + bound.getSouth() + "," + bound.getEast())
                 $("#setting").modal()
@@ -143,28 +146,28 @@ function initControl() {
     // coordinate
     var coordinate = L.control({ position: "bottomleft" })
 
-    coordinate.onAdd = function () {
+    coordinate.onAdd = function() {
         this._div = L.DomUtil.create("div", "info")
         this._div.innerHTML = "<p id=\"lat\">纬度: " + map.getCenter().lat.toFixed(8) + "</p><p id=\"lng\">经度:" + map.getCenter().lng.toFixed(8) + "</p><p id=\"scale\">级别: " + map.getZoom() + "</p>"
         return this._div
     }
 
-    coordinate.updateLatLng = function (latlng) {
+    coordinate.updateLatLng = function(latlng) {
         L.DomUtil.get("lat").innerHTML = "纬度:" + latlng.lat
         L.DomUtil.get("lng").innerHTML = "经度:" + latlng.lng
     }
 
-    coordinate.updateZoom = function (zoom) {
+    coordinate.updateZoom = function(zoom) {
         L.DomUtil.get("scale").innerHTML = "级别:" + zoom
     }
 
     coordinate.addTo(map)
 
-    map.on("mousemove", function (e) {
+    map.on("mousemove", function(e) {
         coordinate.updateLatLng(e.latlng)
     })
 
-    map.on("zoomend", function () {
+    map.on("zoomend", function() {
         coordinate.updateZoom(map.getZoom())
     })
 }
